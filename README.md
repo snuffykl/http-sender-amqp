@@ -9,7 +9,7 @@ A Http API to send message to service bus via `@azure/service-bus` library
 2) There is 2 ways to deploy to minikube: *Note*: Create namespace name `core` in K8s
     - Skaffold command: `skaffold run` (Docker image will build automatically)
 
-    - Helm command: `helm install helm-chart/ --namespace core --name http-sender-amqp` (Need to build docker image first : `docker build -t http-send-amqp .`)
+    - Helm command: `helm install helm-chart/ --namespace core --name http-sender-amqp` (Need to build docker image first : `docker build -t http-sender-amqp .`)
 
 3) After deployment done obtain base URL for the service by running command: `minikube service -n core http-sender-amqp `
 
