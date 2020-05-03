@@ -1,0 +1,17 @@
+replicaCount: 1
+revisionHistoryLimit: 5
+namespace: core
+showSBLogs: true
+image:
+  repository: http-sender-amqp
+  tag: latest
+  pullPolicy: IfNotPresent
+ports: 80
+configs:
+  AZURE_SERVICEBUS_AUTOLOCKRENEWAL_SECONDS: 900
+  AZURE_SERVICEBUS_MAXCONCURRENTCALLS: 1
+  TASK_EMAIL_QUEUE_NAME: taskEmail
+secrets:
+  AZURE_SERVICEBUS_CONNECTION_STRING: TO BE FILL IN
+
+  

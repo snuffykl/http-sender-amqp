@@ -1,0 +1,22 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+build:
+  artifacts:
+  - image: http-send-amqp
+  local:
+    push: false
+deploy:
+  helm:
+    releases:
+    - name: http-send-amqp
+      chartPath: helm-chart
+      valuesFiles:
+      - helm-chart/values.yaml
+      values:
+        image: http-send-amqp
+      namespace: core
+      setValues:
+        debugMode: "true"
+      wait: true
+      imageStrategy:
+        helm: {}

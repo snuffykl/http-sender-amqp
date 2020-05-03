@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "http-sender-amqp-deployment"
+  namespace: {{ .Values.namespace }}
+  labels:
+    name: "http-sender-amqp-deployment"
+spec:
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: "http-sender-amqp"
+  template:
+      metadata:
+          labels:
+            name: "http-sender-amqp"
+          annotations:
+              deployedAt: {{ .Release.Time }}
+      spec:
+          affinity:
+            nodeAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - preference:
+                  matchExpressions:
+                  - key: node-type
+                    operator: In
+                    values:
+                    - core
+                weight: 1
+          containers:
+          - name: api
+            image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- if .Values.debugMode}}
+            command: ["node", "--inspect=0.0.0.0", "./app/http/index.js"]
+            {{- end }}
+            ports:
+            - containerPort: {{ .Values.ports }}
+            resources:
+              requests:
+                memory: 200Mi
+              limits:
+                memory: 600Mi
+            livenessProbe:
+              initialDelaySeconds: 15
+              timeoutSeconds: 3
+              httpGet:
+                path: "/liveness"
+                port: {{ .Values.ports }}
+              {{- if .Values.debugMode}}
+              periodSeconds: 600
+              {{ else }}
+              periodSeconds: 60
+              {{- end }}
+            readinessProbe:
+              initialDelaySeconds: 15
+              timeoutSeconds: 3
+              httpGet:
+                path: "/liveness"
+                port: {{ .Values.ports }}
+              periodSeconds: 30
+            envFrom:
+            - configMapRef:
+                name: http-sender-amqp-config
+            - secretRef:
+                name: http-sender-amqp-secret
+            env:
+            - name: SERVICE_NAME
+              value: http-sender-amqp.api
+            {{ if .Values.showSBLogs }}
+            - name: DEBUG
+              value: azure:service-bus:receiver,azure:service-bus:error,rhea:events,rhea-promise:receiver,rhea-promise:translate,azure-amqp-common:error,rhea-promise:error 
+            {{ end }}
+          terminationGracePeriodSeconds: 370

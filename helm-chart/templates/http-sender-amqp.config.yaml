@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: http-sender-amqp-config
+  namespace: {{ .Values.namespace }}
+data:
+  AZURE_SERVICEBUS_AUTOLOCKRENEWAL_SECONDS: "{{ .Values.configs.AZURE_SERVICEBUS_AUTOLOCKRENEWAL_SECONDS }}"
+  AZURE_SERVICEBUS_MAXCONCURRENTCALLS: "{{ .Values.configs.AZURE_SERVICEBUS_MAXCONCURRENTCALLS }}"
+  TASK_EMAIL_QUEUE_NAME: "{{ .Values.configs.TASK_EMAIL_QUEUE_NAME }}"

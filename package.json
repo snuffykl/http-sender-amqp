@@ -1,0 +1,25 @@
+{
+  "name": "http-sender-amqp",
+  "version": "1.0.0",
+  "description": "Sample API to use @azure/service-bus to replicate issue for AMQP ",
+  "main": "./app/http/index.js",
+  "files": [
+    "app"
+  ],
+  "scripts": {
+    "start": "node ./app/http/index.js"
+  },
+  "author": "snuffykl",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/service-bus": "^1.1.6",
+    "co": "^4.6.0",
+    "dotenv": "^8.2.0",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.0.1",
+    "koa-validate": "^1.0.7",
+    "lodash": "^4.17.15",
+    "parse-duration": "^0.3.3"
+  }
+}
