@@ -31,6 +31,10 @@ spec:
           containers:
           - name: api
             image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+            securityContext:
+              capabilities:
+                add:
+                  - NET_ADMIN
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             {{- if .Values.debugMode}}
             command: ["node", "--inspect=0.0.0.0", "./app/http/index.js"]
@@ -70,6 +74,6 @@ spec:
               value: http-sender-amqp.api
             {{ if .Values.showSBLogs }}
             - name: DEBUG
-              value: azure:service-bus:receiver,azure:service-bus:error,rhea:events,rhea-promise:receiver,rhea-promise:translate,azure-amqp-common:error,rhea-promise:error 
+              value: azure:service-bus:receiver,azure:service-bus:error,rhea:events,rhea-promise:receiver,rhea-promise:translate,azure-amqp-common:error,rhea-promise:error
             {{ end }}
           terminationGracePeriodSeconds: 370
