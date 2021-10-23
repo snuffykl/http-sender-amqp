@@ -1,8 +1,11 @@
 apiVersion: skaffold/v2alpha3
 kind: Config
 build:
+  tagPolicy:
+    sha256: {}
   artifacts:
   - image: http-sender-amqp
+    context: .
   local:
     push: false
 deploy:
