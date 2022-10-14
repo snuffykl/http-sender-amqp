@@ -12,6 +12,6 @@ configs:
   AZURE_SERVICEBUS_MAXCONCURRENTCALLS: 1
   ASYNC_ACTION: asyncactions
 secrets:
-  AZURE_SERVICEBUS_CONNECTION_STRING: "Endpoint=sb://adrian.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=sNBRPl7XNDJi8FBvNnq5/EF2oHAqwgF6ct/RL/vs0Lk="
+  AZURE_SERVICEBUS_CONNECTION_STRING: "TO BE REPLACE"
 
   
