@@ -19,8 +19,8 @@ class Config {
       return this.required.AZURE_SERVICEBUS_CONNECTION_STRING;
     }
   
-    taskEmailQueueName() {
-      return this.required.TASK_EMAIL_QUEUE_NAME;
+    asyncActionQueueName() {
+      return this.required.ASYNC_ACTION;
     }
   
     autoLockRenewalInterval() {

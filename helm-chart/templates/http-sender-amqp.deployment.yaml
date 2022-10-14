@@ -16,7 +16,7 @@ spec:
           labels:
             name: "http-sender-amqp"
           annotations:
-              deployedAt: {{ .Release.Time }}
+              deployedAt: {{ now | quote }}
       spec:
           affinity:
             nodeAffinity:

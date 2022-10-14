@@ -10,8 +10,8 @@ ports: 80
 configs:
   AZURE_SERVICEBUS_AUTOLOCKRENEWAL_SECONDS: 900
   AZURE_SERVICEBUS_MAXCONCURRENTCALLS: 1
-  TASK_EMAIL_QUEUE_NAME: taskEmail
+  ASYNC_ACTION: asyncactions
 secrets:
-  AZURE_SERVICEBUS_CONNECTION_STRING: TO BE FILL IN
+  AZURE_SERVICEBUS_CONNECTION_STRING: "Endpoint=sb://adrian.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=sNBRPl7XNDJi8FBvNnq5/EF2oHAqwgF6ct/RL/vs0Lk="
 
   
